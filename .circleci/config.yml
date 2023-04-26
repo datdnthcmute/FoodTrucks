@@ -10,7 +10,7 @@ jobs:
       - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: echo "!!!"
+      - run: echo "FoodTrucks !!!"
   build-docker-image:
     custom_image:
       docker:
