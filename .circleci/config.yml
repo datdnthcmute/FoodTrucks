@@ -2,13 +2,10 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-orbs:
-  docker: circleci/docker@1.5.0
-  python: circleci/python@2.1.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  check-name-project:
+  check_name_project:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
@@ -20,10 +17,23 @@ jobs:
       - run:
           name: "Project FoodTrucks"
           command: echo "FoodTrucks !!!"
-
+  build_docker_image:
+    base_image:
+      docker:
+        - image: cimg/base:stable
+    custom_image:
+      docker:
+        - image: datdnthcmute/foodtrucks-web
+          auth:
+            username: $DOCKERHUB_USERNAME
+            password: $DOCKERHUB_PASSWORD
+        
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   init-project-workflows:
     jobs:
-      - check-name-project
+      - check_name_project
+  build-docker-image:
+    jobs:
+      - build_docker_image
