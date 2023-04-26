@@ -27,6 +27,7 @@ jobs:
       - docker/check
       - docker/build:
         image: $DOCKER_LOGIN/$CIRCLE_PROJECT REPONAME
+        tag: 0.1.<<pipeline.number>>
     # base_image:
     #   docker:
     #     - image: cimg/base:stable
