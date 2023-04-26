@@ -36,6 +36,6 @@ workflows:
   init-project-workflows:
     jobs:
       - check_name_project
-  build-docker-image:
-    jobs:
-      - build_docker_image
+  # build-docker-image:
+  #   jobs:
+  #     - build_docker_image
