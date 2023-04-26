@@ -17,18 +17,18 @@ jobs:
       - run:
           name: "Project FoodTrucks"
           command: echo "FoodTrucks !!!"
-  build_docker_image:
-    docker:
-      - image: cimg/base:stable
-    # base_image:
-    #   docker:
-    #     - image: cimg/base:stable
-    # custom_image:
-    #   docker:
-    #     - image: datdnthcmute/foodtrucks-web
-    #       auth:
-    #         username: $DOCKERHUB_USERNAME
-    #         password: $DOCKERHUB_PASSWORD
+  # build_docker_image:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   # base_image:
+  #   #   docker:
+  #   #     - image: cimg/base:stable
+  #   # custom_image:
+  #   #   docker:
+  #   #     - image: datdnthcmute/foodtrucks-web
+  #   #       auth:
+  #   #         username: $DOCKERHUB_USERNAME
+  #   #         password: $DOCKERHUB_PASSWORD
         
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
