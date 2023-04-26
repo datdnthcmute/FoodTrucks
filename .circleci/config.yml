@@ -22,7 +22,7 @@ jobs:
   build_docker_image:
     environment:
       DOCKER_IMAGE: foodtrucks-web
-      DOCKER_TAGS: latest
+
     executor: docker/docker
     steps:
       - setup_remote_docker
@@ -32,12 +32,12 @@ jobs:
           docker-password: DOCKER_PASSWORD
       - docker/build:
           image: $DOCKER_USER/$DOCKER_IMAGE
-          tag: $DOCKER_TAGS
+
 
       - docker/push:
           digest-path: /tmp/digest.txt
           image: $DOCKER_USER/$DOCKER_IMAGE
-          tag: $DOCKER_TAGS
+
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
