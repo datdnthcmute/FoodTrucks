@@ -3,7 +3,7 @@
 version: 2.1
 
 orbs:
-  docker: circleci/docker@1.5.0
+  docker: circleci/docker@1.6.0
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -20,23 +20,24 @@ jobs:
           name: "Project FoodTrucks"
           command: echo "FoodTrucks !!!"
   build_docker_image:
-    docker:
-      - image: cimg/base:stable
+    environment:
+      DOCKER_IMAGE: foodtrucks-web
+    executor: docker/docker
     steps:
+      - setup_remote_docker
       - checkout
-      - docker/check
+      - docker/check:
+          docker-username: DOCKER_LOGIN
+          docker-password: DOCKER_PASSWORD
       - docker/build:
-        image: $DOCKER_LOGIN/$CIRCLE_PROJECT REPONAME
-        tag: 0.1.<<pipeline.number>>
-    # base_image:
-    #   docker:
-    #     - image: cimg/base:stable
-    # custom_image:
-    #   docker:
-    #     - image: datdnthcmute/foodtrucks-web
-    #       auth:
-    #         username: $DOCKERHUB_USERNAME
-    #         password: $DOCKERHUB_PASSWORD
+          image: $DOCKER_USER/$DOCKER_IMAGE
+
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_USER/$DOCKER_IMAGE
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
         
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
