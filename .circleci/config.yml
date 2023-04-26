@@ -5,22 +5,13 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  check_name_project:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
+  build:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+      -image: cimg/base:2023.03
     steps:
       - checkout
-      - run:
-          name: "Project FoodTrucks"
-          command: echo "FoodTrucks !!!"
-  build_docker_image:
-    base_image:
-      docker:
-        - image: cimg/base:stable
+      - run: echo "Foodtrucks !!!"
+  build-docker-image:
     custom_image:
       docker:
         - image: datdnthcmute/foodtrucks-web
@@ -33,6 +24,5 @@ jobs:
 workflows:
   init-project-workflows:
     jobs:
-      - check_name_project
-      - build_docker_image
+      - build-docker-image
       
