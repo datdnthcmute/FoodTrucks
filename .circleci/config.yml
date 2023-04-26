@@ -25,6 +25,8 @@ jobs:
     steps:
       - checkout
       - docker/check
+      - docker/build:
+        image: $DOCKER_LOGIN/$CIRCLE_PROJECT REPONAME
     # base_image:
     #   docker:
     #     - image: cimg/base:stable
@@ -41,4 +43,6 @@ workflows:
   init-project-workflows:
     jobs:
       - check_name_project
+  push-docker-image:
+    jobs:
       - build_docker_image
